@@ -15,10 +15,10 @@ void gen(){
 signed main(){
     freopen("./data/in.in", "w", stdout);
     srand(time(0));
-    int n = 5;
+    int n = 50;
     cout << n << '\n';
     for(int i = 1; i <= n; i++) {
-        gen();
+        cout << rand() % 1000 << ' ' << rand() % 10000 << '\n';
     }
     return 0;
 }

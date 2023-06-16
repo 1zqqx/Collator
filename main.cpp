@@ -4,6 +4,10 @@
 #include <direct.h> // 获取路径
 #include <cstring>
 #include <string>
+#include <fstream>
+
+const int FileCount = 4;
+const std::string FileName[FileCount] = {"/AC.exe", "/WA.exe", "/data.exe", "/test.exe"};
 
 int CompileFile();
 int Run_case();
@@ -14,8 +18,12 @@ char* tolower(char s[]);
 std::string tolower(std::string& s);
 int transToFigure(char s[]);
 int transToFigure(std::string& s);
+bool isFileExists_ifstream(std::string& fname);
+void deleteFileIfExists();
 
 int main(int argc, char* argv[]){
+    deleteFileIfExists();
+
     do{ // 预处理编码格式
         SetConsoleOutputCP(65001);
     }while (false);
@@ -70,6 +78,8 @@ int main(int argc, char* argv[]){
             }
         }
     }
+
+    deleteFileIfExists();
     return 0;
 }
 
@@ -99,21 +109,21 @@ int CompileFile(){
     return 1;
 }
 int Run_case() {
-    if(system("data.exe")){
+    if(system("data.exe >> ./data/in.in")){
         std::cerr << "[-] 执行错误...\n";
         return 0;
     }
     else {
         std::cerr << "[=] 生成数据...\n";
     }
-    if(system("WA.exe")){
+    if(system("WA.exe < ./data/in.in > ./data/WA.out")){
         std::cerr << "[-] 执行错误...\n";
         return 0;
     }
     else {
         std::cerr << "[=] 执行WA.exe...\n";
     }
-    if(system("AC.exe")){
+    if(system("AC.exe < ./data/in.in > ./data/AC.out")){
         std::cerr << "[-] 执行错误...\n";
         return 0;
     }
@@ -174,4 +184,20 @@ int transToFigure(char s[]){
 }
 int transToFigure(std::string& s){
     return std::stoi(s);
+}
+bool isFileExists_ifstream(std::string& name) {
+    std::ifstream f(name.c_str());
+    return f.good();
+}
+void deleteFileIfExists(){
+    char path_del[256];
+    _getcwd(path_del, 256);
+    std::string path;
+    for(int i = 0; path_del[i] != 0; i++) path += path_del[i];
+    
+    for(int i = 0; i < FileCount; i++) {
+        std::string s_te = path + FileName[i];
+        int d = remove(s_te.c_str());
+        // std::cout << s_te << ' ' << d << '\n';
+    }
 }
