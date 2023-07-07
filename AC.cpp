@@ -1,49 +1,30 @@
-// 1e6 scanf
 #include <bits/stdc++.h>
+#define pii pair<int, int>
+#define all(sbe) sbe.begin(),sbe.end()
+// #define int long long
 using namespace std;
-
-void solve(){
-    // int n; cin >> n;
-    // vector<int> v, f(n, 0);
-    // int f1 = 1, f2 = 0;
-    // for(int i = 0; i < n; i++) {
-    //     int x; cin >> x;
-    //     if(f1) {
-    //         if(v.empty()) {
-    //             f[i] = 1;
-    //             v.push_back(x);
-    //         }
-    //         else if(x >= v.back()) {
-    //             f[i] = 1;
-    //             v.push_back(x);
-    //         }
-    //         else if(x < v.back() && x <= *v.begin()) {
-    //             f1 = 0;
-    //             f2 = 1;
-    //             f[i] = 1;
-    //             v.push_back(x);
-    //         }
-    //     }
-    //     else if(f2) {
-    //         if(x >= v.back() && x <= *v.begin()) {
-    //             f[i] = 1;
-    //             v.push_back(x);
-    //         }
-    //     }
-    // }
-
-    // for(int i = 0; i < n; i++) cout << f[i];
-    // cout << '\n';
-
-    int a, b; cin >> a >> b;
-    cout << a + b << '\n';
-}
+typedef long long ll;
 
 signed main(){
-    ios::sync_with_stdio(false), cin.tie(nullptr);
-    int t = 1; cin >> t;
-    while(t--){
-        solve();
+#ifdef LOCAL
+    // freopen("in.txt", "r", stdin);
+#endif
+    
+    int n, p, x, q, y; cin >> n >> p >> x >> q >> y;
+    ll s = 0;
+    for(int i = 0; i < n; i++) {
+        int u; cin >> u; s += u;
     }
+    ll ans = 1e18;
+    ans = min(ans, (((s - 1) / n + 1) * n - s) * p);
+
+    for(int i = 0; i < 10000000; i++) {
+        if((s - i * y) % n == 0) {
+            ans = min(ans, 1ll * i * q);
+            break;
+        }
+    }
+
+    cout << ans << '\n';
     return 0;
 }

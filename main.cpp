@@ -109,7 +109,7 @@ int CompileFile(){
     return 1;
 }
 int Run_case() {
-    if(system("data.exe >> ./data/in.in")){
+    if(system("data.exe > ./data/in.in")){
         std::cerr << "[-] 执行错误...\n";
         return 0;
     }
