@@ -1,16 +1,23 @@
 #include <iostream>
+#include <vector>
 #include <ctime>
-
-using namespace std;
+#include <algorithm>
 
 const int N = 1e2+7;
 
 signed main(){
     // freopen("./data/in.in", "w", stdout);
+    int n = 7;
+    std::vector<int> v(7);
+    for(int i = 0; i < n; i++) v[i] = 1 + i;
     srand(time(0));
-    
-    long long n = rand() % 10, p = rand() % 20, x = 1, q = rand() % 20, y = rand() % 20;
-    cout << n << ' ' << p << ' ' << x << ' ' << q << ' ' << y << '\n';
-    for(int i = 1; i <= n; i++) cout << rand() % 20 << ' ';
+    int k = rand() % 13331;
+
+    while(k --) {
+        std::next_permutation(v.begin(), v.end());
+    }
+
+    std::cout << n << '\n';
+    for(auto i:v) std::cout << i << ' ';
     return 0;
 }

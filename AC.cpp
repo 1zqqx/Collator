@@ -6,25 +6,18 @@ using namespace std;
 typedef long long ll;
 
 signed main(){
-#ifdef LOCAL
-    // freopen("in.txt", "r", stdin);
-#endif
-    
-    int n, p, x, q, y; cin >> n >> p >> x >> q >> y;
-    ll s = 0;
-    for(int i = 0; i < n; i++) {
-        int u; cin >> u; s += u;
-    }
-    ll ans = 1e18;
-    ans = min(ans, (((s - 1) / n + 1) * n - s) * p);
+    int n; cin >> n;
+    vector<int> v(n + 1);
+    for(int i = 1; i <= n; i++) cin >> v[i];
 
-    for(int i = 0; i < 10000000; i++) {
-        if((s - i * y) % n == 0) {
-            ans = min(ans, 1ll * i * q);
-            break;
+    int z = 0;
+    for(int i = 1; i <= n; i++) {
+        while(v[i] != i) {
+            swap(v[i], v[v[i]]);
+            z ++;
         }
     }
 
-    cout << ans << '\n';
+    cout << z << '\n';
     return 0;
 }
