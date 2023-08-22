@@ -11,13 +11,13 @@ signed main(){
     // std::vector<int> v(7);
     // for(int i = 0; i < n; i++) v[i] = 1 + i;
     srand(time(0));
-    int a = rand() % 100;
-    int b = rand() % (a - 1) + 1;
+    int a = rand() % 100 + 1;
+    int b = rand() % 100 + 1;
     // while(k --) {
     //     std::next_permutation(v.begin(), v.end());
     // }
 
-    std::cout << a << ' ' << b << '\n';
+    std::cout << std::max(1, a - a % 10) << " + " << std::max(1, b - b % 10) << " = " << a + b - (a + b) % 10 << '\n';
     // for(auto i:v) std::cout << i << ' ';
     return 0;
 }
